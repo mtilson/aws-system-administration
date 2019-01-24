@@ -2,6 +2,7 @@ import tempfile
 from PIL import Image
 import shutil
 import sys
+import re
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 
@@ -16,7 +17,7 @@ tmpdir = tempfile.mkdtemp()
 conn = S3Connection()
 bucket = conn.get_bucket(bucket_name)
 for key in bucket.list(prefix='incoming/'):
-    filename = key.key.strip('incoming/')
+    filename = re.sub(r'^incoming/','',key.key)
     print 'Resizing %s' % filename
     # Copy the file to a local temp file
     tmpfile = '%s/%s' % (tmpdir, filename)
