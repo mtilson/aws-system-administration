@@ -178,7 +178,7 @@
          "Description":"Private DNS of the Puppet client instance",
          "Value":{
             "Fn::GetAtt":[
-               "PuppetMasterInstance",
+               "PuppetClientInstance",
                "PrivateDnsName"
             ]
          }
